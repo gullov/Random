@@ -101,7 +101,7 @@
                 android:ellipsize="end"
                 android:gravity="start"
                 android:maxLines="2"
-                android:text="ЧИСЛО"
+                android:text="ЧИСЛОо"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="#FF00BCD4"
