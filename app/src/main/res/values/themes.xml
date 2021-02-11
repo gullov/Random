@@ -2,7 +2,6 @@
     <!-- Base application theme. -->
     <style name="Theme.Random" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,5 +11,105 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:splitMotionEvents">false</item>
+            <item name="colorAccent">@color/colorAccent</item>
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="TextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">24.0dip</item>
+        <item name="android:layout_marginTop">16.0dip</item>
+        <item name="android:layout_marginRight">24.0dip</item>
+        <item name="android:layout_marginBottom">16.0dip</item>
+        <item name="android:imeOptions">actionDone</item>
+    </style>
+    <style name="TextStyle.Main" parent="@style/TextStyle"><item name="android:textAllCaps">true</item></style>
+
+    <style name="LightAppBarStyle">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="LightAppBarStyle.ModeStyle" parent="@style/LightAppBarStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="navigationIcon">?homeAsUpIndicator</item>
+    </style>
+
+    <style name="TextStyle.Main.Input" parent="@style/TextStyle.Main"><item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item><item name="android:layout_width">fill_parent</item><item name="android:minHeight">56.0dip</item><item name="android:textAllCaps">false</item></style>
+    <style name="TextStyle.Main.Input.Number" parent="@style/TextStyle.Main.Input"><item name="android:lines">1</item><item name="android:inputType">number</item></style>
+
+    <style name="TextStyle.Main.Input.Number.Decimal" parent="@style/TextStyle.Main.Input.Number">
+        <item name="android:inputType">numberDecimal|numberSigned</item>
+    </style>
+
+    <style name="TextStyle.Main.Input.Number.Decimal.Accent" parent="@style/TextStyle.Main.Input.Number.Decimal">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Display1</item>
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="FragmentScrollViewStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingTop">16.0dip</item>
+        <item name="android:paddingBottom">16.0dip</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">?actionBarSize</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+
+    <style name="TextStyle.Params.Input" parent="@style/TextStyle.Params">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_marginTop">4.0dip</item>
+        <item name="android:minHeight">48.0dip</item>
+    </style>
+
+    <style name="TextStyle.Params.Input.Number" parent="@style/TextStyle.Params.Input">
+        <item name="android:lines">1</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+    <style name="TextStyle.Params" parent="@style/TextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:layout_marginLeft">16.0dip</item>
+        <item name="android:layout_marginTop">16.0dip</item>
+        <item name="android:layout_marginRight">16.0dip</item>
+        <item name="android:layout_marginBottom">8.0dip</item>
+    </style>
+
+    <style name="ParamsMenu">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:padding">12.0dip</item>
+        <item name="android:layout_width">48.0dip</item>
+        <item name="android:layout_height">48.0dip</item>
+        <item name="android:tint">#ffbbbbbb</item>
+        <item name="android:contentDescription">@string/menu</item>
+        <item name="srcCompat">@drawable/ic_menu</item>
+    </style>
+
+    <style name="ParamsCard">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">24.0dip</item>
+        <item name="android:layout_marginTop">4.0dip</item>
+        <item name="android:layout_marginRight">24.0dip</item>
+        <item name="android:layout_marginBottom">4.0dip</item>
+        <item name="cardCornerRadius">24.0dip</item>
+        <item name="cardElevation">1.0dip</item>
+    </style>
+
 </resources>

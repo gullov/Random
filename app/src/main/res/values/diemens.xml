@@ -5,4 +5,6 @@
     <item type="dimen" name="i_mode_water_sign_rotation">30.0</item>
     <dimen name="i_mode_water_sign_x">-40.0dip</dimen>
 
+    <integer name="anim_length">1100</integer>
+    <integer name="anim_length_half">550</integer>
 </resources>

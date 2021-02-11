@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/v_trigger_fabs"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom|center"
+    android:layout_margin="16.0dip"
+    android:contentDescription="@string/cd_generate_result"
+    app:fabCustomSize="64dip"
+    app:maxImageSize="32.0dip"
+    app:srcCompat="@drawable/ic_fab" />

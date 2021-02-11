@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/v_params_root"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/v_params_no_repeat"
+        style="@style/ParamsCard">
+
+        <ImageView
+            android:id="@+id/v_param_no_repeat_menu"
+            android:clickable="true"
+            android:focusable="true"
+            style="@style/ParamsMenu" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle.Params"
+                android:text="Без повторений" />
+
+            <TextView
+                android:id="@+id/v_param_no_repeat_counter"
+                style="@style/TextStyle.Params"
+                android:text="1/1000"
+                android:layout_marginTop="16.0dip"
+                android:layout_marginBottom="24.0dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/v_params_quantity"
+        style="@style/ParamsCard">
+
+        <ImageView
+            android:id="@+id/v_param_quantity_menu"
+            android:clickable="true"
+            android:focusable="true"
+            style="@style/ParamsMenu" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                style="@style/TextStyle.Params"
+                android:text="Количество" />
+
+            <EditText
+                android:id="@+id/v_params_quantity_et"
+				style="@style/TextStyle.Params.Input.Number"
+                android:layout_marginBottom="0.0dip"
+                android:hint="1 - 100"
+				android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/v_params_delay"
+        style="@style/ParamsCard">
+
+        <ImageView
+            android:id="@+id/v_params_delay_menu"
+            android:clickable="true"
+            android:focusable="true"
+            style="@style/ParamsMenu" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle.Params"
+                android:text="Время задержки (сек)" />
+
+            <EditText
+                android:id="@+id/v_params_delay_et"
+                style="@style/TextStyle.Params.Input.Number"
+                android:layout_marginBottom="0.0dip"
+                android:hint="1 - 100" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/v_param_add_features"
+        android:layout_width="48.0dip"
+        android:layout_height="48.0dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8.0dip"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cd_add_remove_feature"
+        android:padding="12.0dip"
+        app:srcCompat="@drawable/ic_settings"
+        app:tint="#ffbbbbbb" />
+</LinearLayout>
