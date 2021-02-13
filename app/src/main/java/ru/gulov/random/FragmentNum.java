@@ -4,17 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -25,15 +25,14 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import static java.lang.Math.abs;
 
-public class NumActivity extends AppCompatActivity {
+public class FragmentNum extends Fragment {
+
 
     FloatingActionButton v_trigger_fabs;
     CardView v_result_card;
@@ -45,6 +44,7 @@ public class NumActivity extends AppCompatActivity {
     AsyncTask<?, ?, ?> shuffle;
     ArrayList<Integer> number = new ArrayList<Integer>();
     ArrayList<Integer> helper100 = new ArrayList<Integer>();
+    String counts = "";
     private AnimatorSet mSetRightOut;
     private AnimatorSet mSetLeftIn;
     private boolean mIsBackVisible = false;
@@ -52,30 +52,36 @@ public class NumActivity extends AppCompatActivity {
     private boolean still2 = false;
     private View mCardFrontLayout;
     private View mCardBackLayout;
-    String counts = "";
 
-    @SuppressLint("SetTextI18n")
+    public FragmentNum() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_num);
-
-        first = findViewById(R.id.first);
-        second = findViewById(R.id.second);
-        f_num_from_et = findViewById(R.id.f_num_from_et);
-        f_num_to = findViewById(R.id.f_num_to);
-        v_param_no_repeat_counter = findViewById(R.id.v_param_no_repeat_counter);
-        backgrounds = findViewById(R.id.backgrounds);
-        background = findViewById(R.id.v_result_root);
-        v_trigger_fabs = findViewById(R.id.v_trigger_fabs);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_num, container, false);
 
 
-        findViews();
+        first = v.findViewById(R.id.first);
+        second = v.findViewById(R.id.second);
+        f_num_from_et = v.findViewById(R.id.f_num_from_et);
+        f_num_to = v.findViewById(R.id.f_num_to);
+        v_param_no_repeat_counter = v.findViewById(R.id.v_param_no_repeat_counter);
+        backgrounds = v.findViewById(R.id.backgrounds);
+        background = v.findViewById(R.id.v_result_root);
+        v_trigger_fabs = v.findViewById(R.id.v_trigger_fabs);
+
+
+        mCardBackLayout = v.findViewById(R.id.card_back);
+        mCardFrontLayout = v.findViewById(R.id.card_front);
+
         loadAnimations();
         changeCameraDistance();
 
-        counts = ""+(abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
-        v_param_no_repeat_counter.setText("0/"+counts);
+        counts = "" + (abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
+        v_param_no_repeat_counter.setText("0/" + counts);
 
         f_num_to.setCustomListener(new CustomEditText.MyAdapterListener() {
             @Override
@@ -84,25 +90,28 @@ public class NumActivity extends AppCompatActivity {
                 f_num_from_et.clearFocus();
                 hideKeyboard(v);
                 new Shuffle().execute();
-                counts = ""+(abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
-                v_param_no_repeat_counter.setText("0/"+counts);
+                counts = "" + (abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
+                v_param_no_repeat_counter.setText("0/" + counts);
 
             }
         });
-        f_num_to.setOnEditorActionListener((v, actionId, event) -> {
+        f_num_to.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_DONE:
+                        Log.d("plaplapl", "onEditorAction: " + "plaplap");
+                        f_num_to.clearFocus();
+                        hideKeyboard(v);
+                        //shuffle = new Shuffle().execute();
 
-            switch (actionId) {
-                case EditorInfo.IME_ACTION_DONE:
-                    Log.d("plaplapl", "onEditorAction: " + "plaplap");
-                    f_num_to.clearFocus();
-                    hideKeyboard(v);
-                    //shuffle = new Shuffle().execute();
+                        counts = "" + (abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
+                        v_param_no_repeat_counter.setText("0/" + counts);
+                        return true;
+                    default:
+                        return false;
+                }
 
-                    counts = ""+(abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
-                    v_param_no_repeat_counter.setText("0/"+counts);
-                    return true;
-                default:
-                    return false;
             }
 
         });
@@ -115,8 +124,8 @@ public class NumActivity extends AppCompatActivity {
                 hideKeyboard(v);
                 new Shuffle().execute();
 
-                counts = ""+(abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
-                v_param_no_repeat_counter.setText("0/"+counts);
+                counts = "" + (abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
+                v_param_no_repeat_counter.setText("0/" + counts);
             }
         });
         f_num_from_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -131,8 +140,8 @@ public class NumActivity extends AppCompatActivity {
                         hideKeyboard(v);
                         //shuffle = new Shuffle();
                         //shuffle.execute();
-                        counts = ""+(abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
-                        v_param_no_repeat_counter.setText("0/"+counts);
+                        counts = "" + (abs(Integer.parseInt(f_num_to.getText().toString()) - Integer.parseInt(f_num_from_et.getText().toString())) + 1);
+                        v_param_no_repeat_counter.setText("0/" + counts);
                         return true;
                     default:
                         return false;
@@ -140,11 +149,16 @@ public class NumActivity extends AppCompatActivity {
 
             }
         });
+        backgrounds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                circularReActivity();
 
 
-        backgrounds.setOnClickListener(v -> {
-            circularReActivity();
-            still2 = false;
+                still2 = false;
+            }
+
         });
         mSetRightOut.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -171,7 +185,7 @@ public class NumActivity extends AppCompatActivity {
                     rotate.setInterpolator(new AccelerateDecelerateInterpolator());
                     v_trigger_fabs.startAnimation(rotate);
                     flipCard(v_trigger_fabs);
-                    first.setText(number.get(1));
+                    first.setText("number.get(1)");
 
                 } else if (!still) {
                     RotateAnimation rotate = new RotateAnimation(360, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -180,19 +194,20 @@ public class NumActivity extends AppCompatActivity {
                     v_trigger_fabs.startAnimation(rotate);
                     flipCard(v_trigger_fabs);
                     if (globalIndex % 2 == 0) {
-                        first.setText(number.get(1));
+                        first.setText("number.get(1)");
                     } else {
-                        second.setText(number.get(1));
+                        second.setText("number.get(1)");
                     }
                 }
             }
         });
 
+        return v;
 
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -267,16 +282,11 @@ public class NumActivity extends AppCompatActivity {
     }
 
     private void loadAnimations() {
-        mSetRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.in_animation);
-        mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.out_animation);
+        mSetRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.in_animation);
+        mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(getContext(), R.animator.out_animation);
         mSetRightOut.setInterpolator(new AccelerateDecelerateInterpolator());
         mSetLeftIn.setInterpolator(new AccelerateDecelerateInterpolator());
 
-    }
-
-    private void findViews() {
-        mCardBackLayout = findViewById(R.id.card_back);
-        mCardFrontLayout = findViewById(R.id.card_front);
     }
 
     public void flipCard(View view) {
@@ -298,17 +308,11 @@ public class NumActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(NumActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.design_bottom_sheet_slide_in1, R.anim.design_bottom_sheet_slide_out1);
-    }
 
     class Shuffle extends AsyncTask<Void, Void, Void> {
         int counter = 0;
         int counter2 = 100;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -319,11 +323,11 @@ public class NumActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
 
-           for (int i = Integer.parseInt(f_num_from_et.getText().toString())-1;
+            for (int i = Integer.parseInt(f_num_from_et.getText().toString()) - 1;
                  i < Integer.parseInt(f_num_to.getText().toString()); i++) {
                 number.add((int) (i + 1));
                 counter++;
-                Log.d("plaplapla", "doInBackground: "+number.get(counter-1)+"  "+number.size());
+                Log.d("plaplapla", "doInBackground: " + number.get(counter - 1) + "  " + number.size());
             }
             return null;
         }

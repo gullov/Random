@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="20"
-        android:textSize="60dp"
+        android:textSize="40dp"
         android:id="@+id/first"
         android:textColor="@color/white"
         style="@style/Base.TextAppearance.AppCompat.Display1"
